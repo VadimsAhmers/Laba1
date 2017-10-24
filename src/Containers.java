@@ -7,7 +7,16 @@ abstract class Containers extends Item {
 
     Collection<Item> contains;
 
-    abstract protected void add(Item item) throws ItemStoreException;
+    protected Containers(String name, double weight) {
+        super(name, weight);
+    }
+
+    protected Containers(String name){
+
+        super(name);
+    }
+
+    abstract protected void addItem(Item item) throws ItemStoreException;
 
     protected Item pullOut(){
         Iterator<Item> iterator = contains.iterator();
@@ -27,7 +36,7 @@ abstract class Containers extends Item {
         return contains;
     }
 
-    class ItemStoreException extends Exception{
+    class ItemStoreException extends RuntimeException{
 
     }
 

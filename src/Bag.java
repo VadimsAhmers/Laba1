@@ -6,22 +6,21 @@ class Bag extends Containers{
     private double itemsWeight = 0;
 
 
-    protected Bag(String Name, double maxWeight, double Weight) {
-        this.name = Name;
+    protected Bag(String name, double maxWeight, double weight) {
+
+        super(name, weight);
         this.maxWeight = maxWeight;
-        this.Weight = Weight;
 
         contains = new HashSet<Item>();
     }
 
-       protected void add(Item item)  {
+       protected void addItem(Item item)  {
 
-            if (( itemsWeight + item.Weight )< maxWeight ){
+            if (( itemsWeight + item.weight )< maxWeight ){
                 contains.add(item);
+                itemsWeight+=item.weight;
             }
             else throw new ItemStoreException();
-
-
 
         }
 
