@@ -16,6 +16,11 @@ abstract class Containers extends Item {
         super(name);
     }
 
+    @Override
+    public String toString(){
+        return super.toString();
+    }
+
     abstract protected void addItem(Item item) throws ItemStoreException;
 
     protected Item pullOut(){
@@ -39,9 +44,6 @@ abstract class Containers extends Item {
     class ItemStoreException extends RuntimeException{
 
     }
-
-
-
 
 
 }

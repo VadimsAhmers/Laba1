@@ -16,6 +16,17 @@ public class Pile extends Containers{
 
     }
 
+    @Override
+    public String toString(){
+        String resultInfo = super.toString();
+
+
+
+        return resultInfo;
+
+    }
+
+
     protected Pile(String name, int maxItemsQuantity){
         super(name);
         this.contains = new ArrayDeque<Item>();

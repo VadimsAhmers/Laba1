@@ -6,22 +6,35 @@ import java.util.HashSet;
     protected double weight;
     protected HashSet<String> attributes;
 
-    public String getName() {
+    protected String getName() {
         return name;
     }
 
-    public double getWeight() {
+    protected double getWeight() {
         return weight;
     }
 
-    public HashSet<String> getAttributes() {
+    protected HashSet<String> getAttributes() {
         return attributes;
+    }
+
+    @Override
+    public String toString(){
+        return "Class: " + this.getClass() + ";" + "Name: " + this.name; //+ ";" + "Weight: " + this.weight + ";"
+
+    }
+
+    protected void getInfo(){
+        this.toString();
+
     }
 
     protected Item(String name, double weight, String attribute)    {
 
         this.name = name;
         this.weight = weight;
+        attributes = new HashSet<>();
+
         attributes.add(attribute);
     }
 
@@ -29,10 +42,12 @@ import java.util.HashSet;
 
         this.name = name;
         this.weight = weight;
+        attributes = new HashSet<>();
     }
 
     protected Item(String name) {
         this.name = name;
+        attributes = new HashSet<>();
     }
 
 

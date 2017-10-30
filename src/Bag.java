@@ -6,12 +6,25 @@ class Bag extends Containers{
     private double itemsWeight = 0;
 
 
+
     protected Bag(String name, double maxWeight, double weight) {
 
         super(name, weight);
         this.maxWeight = maxWeight;
 
         contains = new HashSet<Item>();
+    }
+
+    @Override
+    public String toString(){
+
+        String resultInfo= super.toString();
+        resultInfo+="Attributes: ";
+
+        for (String s:attributes)   resultInfo+=s;
+
+        return resultInfo;
+
     }
 
        protected void addItem(Item item)  {
@@ -23,6 +36,8 @@ class Bag extends Containers{
             else throw new ItemStoreException();
 
         }
+
+
 
 
 }
