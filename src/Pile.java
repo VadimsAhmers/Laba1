@@ -8,9 +8,10 @@ public class Pile extends Containers{
 
     protected void addItem(Item item){
 
-        if ((itemsQuantity<maxItemsQuantity)&&(item.attributes.contains("flat"))) {
-             contains.add(item);
+        if (((itemsQuantity<maxItemsQuantity)&&(item.attributes.contains("flat")))&&(!item.attributes.contains("isAdded"))) {
+             content.add(item);
              itemsQuantity++;
+             item.attributes.add("isAdded");
         }
         else throw new ItemStoreException();
 
@@ -20,8 +21,6 @@ public class Pile extends Containers{
     public String toString(){
         String resultInfo = super.toString();
 
-
-
         return resultInfo;
 
     }
@@ -29,7 +28,7 @@ public class Pile extends Containers{
 
     protected Pile(String name, int maxItemsQuantity){
         super(name);
-        this.contains = new ArrayDeque<Item>();
+        this.content = new ArrayDeque<Item>();
         this.maxItemsQuantity = maxItemsQuantity;
 
     }

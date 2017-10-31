@@ -25,7 +25,7 @@ import java.util.HashSet;
     }
 
     protected void getInfo(){
-        this.toString();
+        System.out.println(this.toString());
 
     }
 

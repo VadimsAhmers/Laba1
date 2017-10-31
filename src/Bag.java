@@ -12,14 +12,14 @@ class Bag extends Containers{
         super(name, weight);
         this.maxWeight = maxWeight;
 
-        contains = new HashSet<Item>();
+        content = new HashSet<Item>();
     }
 
     @Override
     public String toString(){
 
         String resultInfo= super.toString();
-        resultInfo+="Attributes: ";
+        resultInfo+=" Attributes: ";
 
         for (String s:attributes)   resultInfo+=s;
 
@@ -29,9 +29,11 @@ class Bag extends Containers{
 
        protected void addItem(Item item)  {
 
-            if (( itemsWeight + item.weight )< maxWeight ){
-                contains.add(item);
+            if ((( itemsWeight + item.weight )< maxWeight )&&(!item.attributes.contains("isAdded"))){
+                content.add(item);
                 itemsWeight+=item.weight;
+
+                item.attributes.add("isAdded");
             }
             else throw new ItemStoreException();
 

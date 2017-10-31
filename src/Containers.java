@@ -5,7 +5,7 @@ import java.util.Iterator;
 abstract class Containers extends Item {
 
 
-    Collection<Item> contains;
+    Collection<Item> content;
 
     protected Containers(String name, double weight) {
         super(name, weight);
@@ -24,7 +24,7 @@ abstract class Containers extends Item {
     abstract protected void addItem(Item item) throws ItemStoreException;
 
     protected Item pullOut(){
-        Iterator<Item> iterator = contains.iterator();
+        Iterator<Item> iterator = content.iterator();
 
         Item pulledOutItem = null;
 
@@ -38,7 +38,7 @@ abstract class Containers extends Item {
     }
 
     protected Collection<Item> getItemsList(){
-        return contains;
+        return content;
     }
 
     class ItemStoreException extends RuntimeException{
