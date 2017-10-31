@@ -3,7 +3,11 @@ import java.util.HashSet;
 class Bag extends Containers{
 
     private double maxWeight = 0;
-    private double itemsWeight = 0;
+
+    private double itemsWeight = weight;
+    protected double getItemsWeight() {
+        return itemsWeight;
+    }
 
 
 
