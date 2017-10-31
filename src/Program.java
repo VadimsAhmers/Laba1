@@ -12,13 +12,5 @@ public class Program {
         d.addItem(a);
         d.addItem(b);
 
-        d.getInfo();
-
-        a.getInfo();
-        b.getInfo();
-        c.getInfo();
-        //e.toString();
-        System.out.println("Test");
-
     }
 }
