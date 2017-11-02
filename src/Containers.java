@@ -7,8 +7,8 @@ abstract class Containers extends Item {
 
     Collection<Item> content;
 
-    protected Containers(String name, double weight) {
-        super(name, weight);
+    protected Containers(String name, double itemWeight) {
+        super(name, itemWeight);
     }
 
     protected Containers(String name){
@@ -31,6 +31,7 @@ abstract class Containers extends Item {
         if (iterator.hasNext()) {
             pulledOutItem = iterator.next();
             iterator.remove();
+            this.fullWeight -= pulledOutItem.itemWeight;
         }
 
         return pulledOutItem;

@@ -4,13 +4,6 @@ class Bag extends Containers{
 
     private double maxWeight = 0;
 
-    private double itemsWeight = weight;
-    protected double getItemsWeight() {
-        return itemsWeight;
-    }
-
-
-
     protected Bag(String name, double maxWeight, double weight) {
 
         super(name, weight);
@@ -33,9 +26,10 @@ class Bag extends Containers{
 
        protected void addItem(Item item)  {
 
-            if ((( itemsWeight + item.weight )< maxWeight )&&(!item.attributes.contains("isAdded"))){
+            if ((( this.fullWeight + item.itemWeight -this.itemWeight )<= maxWeight )&&(!item.attributes.contains("isAdded"))){
                 content.add(item);
-                itemsWeight+=item.weight;
+
+                this.fullWeight +=item.fullWeight;
 
                 item.attributes.add("isAdded");
             }

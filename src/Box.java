@@ -1,7 +1,7 @@
 public class Box extends Bag {
 
-protected Box(String name, double maxWeight, double weight){
-    super(name, maxWeight, weight);
+protected Box(String name, double maxWeight, double itemWeight){
+    super(name, maxWeight, itemWeight);
     attributes.add("flat");
 }
 

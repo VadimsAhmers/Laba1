@@ -3,7 +3,8 @@ import java.util.HashSet;
  class Item {
 
     protected String name;
-    protected double weight;
+    protected double itemWeight;
+    protected double fullWeight;
     protected HashSet<String> attributes;
 
     protected String getName() {
@@ -11,7 +12,7 @@ import java.util.HashSet;
     }
 
     protected double getWeight() {
-        return weight;
+        return itemWeight;
     }
 
     protected HashSet<String> getAttributes() {
@@ -20,7 +21,11 @@ import java.util.HashSet;
 
     @Override
     public String toString(){
-        return "Class: " + this.getClass() + ";" + "Name: " + this.name; //+ ";" + "Weight: " + this.weight + ";"
+
+        String info = "Class: " + this.getClass() + ";" + "Name: " + this.name + " "; //+ ";" + "Weight: " + this.weight + ";"
+
+        for (String s:this.attributes) info +=s;
+        return info;
 
     }
 
@@ -29,19 +34,21 @@ import java.util.HashSet;
 
     }
 
-    protected Item(String name, double weight, String attribute)    {
+    protected Item(String name, double itemWeight, String attribute)    {
 
         this.name = name;
-        this.weight = weight;
+        this.itemWeight = itemWeight;
+        this.fullWeight = itemWeight;
         attributes = new HashSet<>();
 
         attributes.add(attribute);
     }
 
-    protected Item(String name, double weight){
+    protected Item(String name, double itemWeight){
 
         this.name = name;
-        this.weight = weight;
+        this.itemWeight = itemWeight;
+        this.fullWeight = itemWeight;
         attributes = new HashSet<>();
     }
 
