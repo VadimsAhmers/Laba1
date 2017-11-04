@@ -24,7 +24,7 @@ import java.util.HashSet;
 
         String info = "Class: " + this.getClass() + ";" + "Name: " + this.name + " "; //+ ";" + "Weight: " + this.weight + ";"
 
-        for (String s:this.attributes) info +=s;
+        for (String s:this.attributes) info +=" " + s;
         return info;
 
     }

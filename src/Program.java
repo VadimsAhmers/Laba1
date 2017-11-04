@@ -9,8 +9,15 @@ public class Program {
         Bag d = new Bag("bag1", 5, 0.1);
         Box e = new Box("box1", 10, 0.5);
 
-        d.addItem(a);
-        d.addItem(b);
+        try {
+
+            d.addItem(a);
+            d.addItem(b);
+        }catch (Containers.ItemStoreException ise){
+            System.out.println("Не лезет больше");
+        }catch (Containers.ItemAlreadyAddedException iaae){
+            System.out.println("Предмет уже где-то лежит");
+        }
 
     }
 }

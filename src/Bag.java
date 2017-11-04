@@ -24,9 +24,11 @@ class Bag extends Containers{
 
     }
 
-       protected void addItem(Item item)  {
+       protected void addItem(Item item) throws ItemStoreException, ItemAlreadyAddedException  {
 
-            if ((( this.fullWeight + item.itemWeight -this.itemWeight )<= maxWeight )&&(!item.attributes.contains("isAdded"))){
+            if (item.attributes.contains("isAdded")) throw new ItemAlreadyAddedException();
+
+            if ((( this.fullWeight + item.itemWeight -this.itemWeight )<= maxWeight )){
                 content.add(item);
 
                 this.fullWeight +=item.fullWeight;

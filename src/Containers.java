@@ -21,7 +21,7 @@ abstract class Containers extends Item {
         return super.toString();
     }
 
-    abstract protected void addItem(Item item) throws ItemStoreException;
+    abstract protected void addItem(Item item) throws ItemStoreException, ItemAlreadyAddedException;
 
     protected Item pullOut(){
         Iterator<Item> iterator = content.iterator();
@@ -42,7 +42,11 @@ abstract class Containers extends Item {
         return content;
     }
 
-    class ItemStoreException extends RuntimeException{
+    class ItemStoreException extends Exception{
+
+    }
+
+    class ItemAlreadyAddedException extends Exception{
 
     }
 

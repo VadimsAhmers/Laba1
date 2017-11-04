@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.util.ArrayDeque;
 import java.util.HashSet;
 
 import static org.junit.Assert.*;
@@ -11,6 +12,7 @@ public class TestProgram {
                 c = new Item("brick3", 2, "flat");
     static Bag d = new Bag("bag1", 5, 0.1);
     static Box e = new Box("box1", 10, 0.5);
+    static Pile f = new Pile("pile1", 3);
 
 
     @Test
@@ -21,10 +23,14 @@ public class TestProgram {
         assertNotNull(c);
         assertNotNull(d);
         assertNotNull(e);
+        assertNotNull(f);
+
     }
 
     @Test
-    public void testAddItem(){
+    public void testAddItem() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
+        emptyAllContainers();
+
         d.addItem(a);
         d.addItem(b);
         e.addItem(c);
@@ -44,31 +50,57 @@ public class TestProgram {
         if (d.attributes.contains("isAdded")) d.attributes.remove("isAdded");
 
         d.content = new HashSet<>();
+        e.content = new HashSet<>();
+        f.content = new ArrayDeque<>();
+        d.fullWeight = d.itemWeight;
+        e.fullWeight = e.itemWeight;
+        f.itemsQuantity = 0;
 
-        //System.out.println(a.toString());
+    }
+
+    @Test(expected = Containers.ItemAlreadyAddedException.class)
+    public void testItemAlreadyAddedExceptionThrowing() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
+
+        emptyAllContainers();
+
+
+            d.addItem(a);
+            d.addItem(a);
 
     }
 
     @Test(expected = Containers.ItemStoreException.class)
-    public void testItemStoreExceptionThrowingWhenItemIsAdded(){
+    public void testItemStoreExceptionThrowingWhenMaxWeightIsExceeded() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
 
         emptyAllContainers();
-        d.addItem(a);
-        //d.addItem(a);
-    }
 
-
-
-    /*@Test(expected = Containers.ItemStoreException.class)
-    public void testItemStoreExceptionThrowingWhenMaxWeightIsExceeded(){
-        a.attributes.remove("isAdded");
-        b.attributes.remove("isAdded");
-        c.attributes.remove("isAdded");
-        d.attributes.remove("isAdded");
         d.addItem(a);
         d.addItem(b);
         e.addItem(c);
-        e.addItem(d);
-    }*/
+        e.addItem(d); // Вес = 6.6 кг, не хватает до максимального
+
+        Item heavyWeight = new Item("brick4", 4);
+        e.addItem(heavyWeight);
+    }
+
+    @Test
+    public void testAddItemsToPile() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
+
+        emptyAllContainers();
+
+        f.addItem(a);
+        f.addItem(b);
+        f.addItem(e);
+        assertTrue(f.pullOut()==a);
+    }
+
+    @Test(expected = Containers.ItemStoreException.class)
+    public void testItemStoreExceptionThrowingWhenItemIsNotFlat() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
+        emptyAllContainers();
+        f.addItem(a);
+        f.addItem(d);
+    }
+
+
 
 }
