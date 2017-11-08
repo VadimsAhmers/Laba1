@@ -13,9 +13,9 @@ public class Program {
 
             d.addItem(a);
             d.addItem(b);
-        }catch (Containers.ItemStoreException ise){
+        }catch (ItemStoreException ise){
             System.out.println("Не лезет больше");
-        }catch (Containers.ItemAlreadyAddedException iaae){
+        }catch (ItemAlreadyAddedException iaae){
             System.out.println("Предмет уже где-то лежит");
         }
 

@@ -1,8 +1,11 @@
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 class Bag extends Containers{
 
     private double maxWeight = 0;
+    protected Set<Item> content = new HashSet<>();
 
     protected Bag(String name, double maxWeight, double weight) {
 
@@ -38,6 +41,20 @@ class Bag extends Containers{
             else throw new ItemStoreException();
 
         }
+    protected Item pullOut(){
+        Iterator<Item> iterator = content.iterator();
+
+        Item pulledOutItem = null;
+
+        if (iterator.hasNext()) {
+            pulledOutItem = iterator.next();
+            iterator.remove();
+            this.fullWeight -= pulledOutItem.itemWeight;
+        }
+
+        return pulledOutItem;
+
+    }
 
 
 

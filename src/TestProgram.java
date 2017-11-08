@@ -7,12 +7,12 @@ import static org.junit.Assert.*;
 
 public class TestProgram {
 
-    static Item a = new Item("brick1", 2, "flat"),
+    private static Item a = new Item("brick1", 2, "flat"),
                 b = new Item("brick2", 2, "flat"),
                 c = new Item("brick3", 2, "flat");
-    static Bag d = new Bag("bag1", 5, 0.1);
-    static Box e = new Box("box1", 10, 0.5);
-    static Pile f = new Pile("pile1", 3);
+    private static Bag d = new Bag("bag1", 5, 0.1);
+    private static Box e = new Box("box1", 10, 0.5);
+    private static Pile f = new Pile("pile1", 3);
 
 
     @Test
@@ -28,7 +28,7 @@ public class TestProgram {
     }
 
     @Test
-    public void testAddItem() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
+    public void testAddItem() throws ItemStoreException, ItemAlreadyAddedException{
         emptyAllContainers();
 
         d.addItem(a);
@@ -43,7 +43,7 @@ public class TestProgram {
 
     }
 
-    protected void emptyAllContainers(){
+    private void emptyAllContainers(){
         if (a.attributes.contains("isAdded")) a.attributes.remove("isAdded");
         if (b.attributes.contains("isAdded")) b.attributes.remove("isAdded");
         if (c.attributes.contains("isAdded")) c.attributes.remove("isAdded");
@@ -58,8 +58,8 @@ public class TestProgram {
 
     }
 
-    @Test(expected = Containers.ItemAlreadyAddedException.class)
-    public void testItemAlreadyAddedExceptionThrowing() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
+    @Test(expected = ItemAlreadyAddedException.class)
+    public void testItemAlreadyAddedExceptionThrowing() throws ItemStoreException, ItemAlreadyAddedException{
 
         emptyAllContainers();
 
@@ -69,8 +69,8 @@ public class TestProgram {
 
     }
 
-    @Test(expected = Containers.ItemStoreException.class)
-    public void testItemStoreExceptionThrowingWhenMaxWeightIsExceeded() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
+    @Test(expected = ItemStoreException.class)
+    public void testItemStoreExceptionThrowingWhenMaxWeightIsExceeded() throws ItemStoreException, ItemAlreadyAddedException{
 
         emptyAllContainers();
 
@@ -84,18 +84,18 @@ public class TestProgram {
     }
 
     @Test
-    public void testAddItemsToPile() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
+    public void testAddItemsToPile() throws ItemStoreException, ItemAlreadyAddedException{
 
         emptyAllContainers();
 
         f.addItem(a);
         f.addItem(b);
         f.addItem(e);
-        assertTrue(f.pullOut()==a);
+        assertTrue(f.pullOut()==e);
     }
 
-    @Test(expected = Containers.ItemStoreException.class)
-    public void testItemStoreExceptionThrowingWhenItemIsNotFlat() throws Containers.ItemStoreException, Containers.ItemAlreadyAddedException{
+    @Test(expected = ItemStoreException.class)
+    public void testItemStoreExceptionThrowingWhenItemIsNotFlat() throws ItemStoreException, ItemAlreadyAddedException{
         emptyAllContainers();
         f.addItem(a);
         f.addItem(d);
