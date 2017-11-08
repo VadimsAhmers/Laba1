@@ -11,14 +11,13 @@ class Bag extends Containers{
 
         super(name, weight);
         this.maxWeight = maxWeight;
-
         content = new HashSet<Item>();
     }
 
     @Override
     public String toString(){
 
-        String resultInfo= super.toString();
+        String resultInfo = super.toString();
         resultInfo+=" Attributes: ";
 
         for (String s:attributes)   resultInfo+=s;
@@ -26,32 +25,26 @@ class Bag extends Containers{
         return resultInfo;
 
     }
+    @Override
+    protected void addItem(Item item) throws ItemStoreException, ItemAlreadyAddedException  {
 
-       protected void addItem(Item item) throws ItemStoreException, ItemAlreadyAddedException  {
-
-            if (item.attributes.contains("isAdded")) throw new ItemAlreadyAddedException();
-
-            if ((( this.fullWeight + item.itemWeight -this.itemWeight )<= maxWeight )){
+        if ((( this.fullWeight + item.itemWeight -this.itemWeight )<= maxWeight )){
+                super.addItem(item);
                 content.add(item);
-
-                this.fullWeight +=item.fullWeight;
-
-                item.attributes.add("isAdded");
             }
             else throw new ItemStoreException();
 
         }
+
     protected Item pullOut(){
         Iterator<Item> iterator = content.iterator();
-
         Item pulledOutItem = null;
 
         if (iterator.hasNext()) {
             pulledOutItem = iterator.next();
             iterator.remove();
-            this.fullWeight -= pulledOutItem.itemWeight;
+            pullOutAttributes(pulledOutItem);
         }
-
         return pulledOutItem;
 
     }

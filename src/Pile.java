@@ -8,18 +8,18 @@ public class Pile extends Containers{
     protected int itemsQuantity = 0;
     protected Deque<Item> content;
 
-
+    @Override
     protected void addItem(Item item) throws ItemStoreException, ItemAlreadyAddedException{
-
-        if (item.attributes.contains("isAdded")) throw new ItemAlreadyAddedException();
 
         if (((itemsQuantity<maxItemsQuantity)&&(item.attributes.contains("flat")))) {
 
+             super.addItem(item);
+
              content.add(item);
              itemsQuantity++;
-             item.attributes.add("isAdded");
         }
         else throw new ItemStoreException();
+
 
     }
 
@@ -27,8 +27,9 @@ public class Pile extends Containers{
 
         Item pulledOutItem = content.pollLast();
 
-        if (!pulledOutItem.equals(null)){
-            this.fullWeight -= pulledOutItem.itemWeight;
+        if (!(pulledOutItem==null)){
+
+            pullOutAttributes(pulledOutItem);
         }
 
         return pulledOutItem;

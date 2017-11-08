@@ -10,7 +10,6 @@ public class Program {
         Box e = new Box("box1", 10, 0.5);
 
         try {
-
             d.addItem(a);
             d.addItem(b);
         }catch (ItemStoreException ise){

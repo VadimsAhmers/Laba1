@@ -1,8 +1,7 @@
+import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayDeque;
 import java.util.HashSet;
-
 import static org.junit.Assert.*;
 
 public class TestProgram {
@@ -14,36 +13,8 @@ public class TestProgram {
     private static Box e = new Box("box1", 10, 0.5);
     private static Pile f = new Pile("pile1", 3);
 
-
-    @Test
-    public void testItemObjectsCreation(){
-
-        assertNotNull(a);
-        assertNotNull(b);
-        assertNotNull(c);
-        assertNotNull(d);
-        assertNotNull(e);
-        assertNotNull(f);
-
-    }
-
-    @Test
-    public void testAddItem() throws ItemStoreException, ItemAlreadyAddedException{
-        emptyAllContainers();
-
-        d.addItem(a);
-        d.addItem(b);
-        e.addItem(c);
-
-        assertEquals(4.1, d.fullWeight, 0);
-        //assertEquals(2.5, e.getItemsWeight(),  0);
-
-        e.addItem(d);
-        assertEquals(6.6, e.fullWeight, 0);
-
-    }
-
-    private void emptyAllContainers(){
+    @Before
+    public void emptyAllContainers(){
         if (a.attributes.contains("isAdded")) a.attributes.remove("isAdded");
         if (b.attributes.contains("isAdded")) b.attributes.remove("isAdded");
         if (c.attributes.contains("isAdded")) c.attributes.remove("isAdded");
@@ -55,24 +26,43 @@ public class TestProgram {
         d.fullWeight = d.itemWeight;
         e.fullWeight = e.itemWeight;
         f.itemsQuantity = 0;
+    }
 
+    @Test
+    public void testItemObjectsCreation(){
+
+        assertNotNull(a);
+        assertNotNull(b);
+        assertNotNull(c);
+        assertNotNull(d);
+        assertNotNull(e);
+        assertNotNull(f);
+    }
+
+    @Test
+    public void testAddItem() throws ItemStoreException, ItemAlreadyAddedException{
+
+        d.addItem(a);
+        d.addItem(b);
+        e.addItem(c);
+
+        assertEquals(4.1, d.fullWeight, 0);
+        //assertEquals(2.5, e.getItemsWeight(),  0);
+
+        e.addItem(d);
+        assertEquals(6.6, e.fullWeight, 0);
+        //d.addItem(new Item("brick5", 2));
     }
 
     @Test(expected = ItemAlreadyAddedException.class)
     public void testItemAlreadyAddedExceptionThrowing() throws ItemStoreException, ItemAlreadyAddedException{
 
-        emptyAllContainers();
-
-
             d.addItem(a);
             d.addItem(a);
-
     }
 
     @Test(expected = ItemStoreException.class)
     public void testItemStoreExceptionThrowingWhenMaxWeightIsExceeded() throws ItemStoreException, ItemAlreadyAddedException{
-
-        emptyAllContainers();
 
         d.addItem(a);
         d.addItem(b);
@@ -86,8 +76,6 @@ public class TestProgram {
     @Test
     public void testAddItemsToPile() throws ItemStoreException, ItemAlreadyAddedException{
 
-        emptyAllContainers();
-
         f.addItem(a);
         f.addItem(b);
         f.addItem(e);
@@ -96,9 +84,15 @@ public class TestProgram {
 
     @Test(expected = ItemStoreException.class)
     public void testItemStoreExceptionThrowingWhenItemIsNotFlat() throws ItemStoreException, ItemAlreadyAddedException{
-        emptyAllContainers();
+
         f.addItem(a);
         f.addItem(d);
+    }
+
+    @Test(expected = ItemStoreException.class)
+    public void testItemStoreExceptionThrowingWhenContainerIsAdded()throws ItemStoreException, ItemAlreadyAddedException{
+        e.addItem(d);
+        d.addItem(a);
     }
 
 

@@ -14,7 +14,19 @@ abstract class Containers extends Item {
         return super.toString();
     }
 
-    abstract protected void addItem(Item item) throws ItemStoreException, ItemAlreadyAddedException;
+    protected void addItem(Item item) throws ItemStoreException, ItemAlreadyAddedException{
 
-    abstract protected Item pullOut();
+        if (this.attributes.contains("isAdded")) throw new ItemStoreException();
+        if (item.attributes.contains("isAdded")) throw new ItemAlreadyAddedException();
+
+        this.fullWeight +=item.fullWeight;
+        item.attributes.add("isAdded");
+
+    }
+    protected void pullOutAttributes(Item pulledOutItem){
+        this.fullWeight -= pulledOutItem.itemWeight;
+        pulledOutItem.attributes.remove("isAdded");
+    }
+
+    abstract Item pullOut();
 }

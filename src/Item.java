@@ -10,7 +10,6 @@ import java.util.HashSet;
     protected String getName() {
         return name;
     }
-
     protected double getWeight() {
         return itemWeight;
     }
@@ -26,7 +25,6 @@ import java.util.HashSet;
 
         for (String s:this.attributes) info +=" " + s;
         return info;
-
     }
 
     protected void getInfo(){
@@ -56,9 +54,4 @@ import java.util.HashSet;
         this.name = name;
         attributes = new HashSet<>();
     }
-
-
-
-
-
 }
